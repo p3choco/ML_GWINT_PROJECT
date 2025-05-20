@@ -1,0 +1,17 @@
+path: data
+train: train/images
+val: validation/images
+nc: 12
+names:
+- bohater
+- katapulta
+- lucznik
+- manekin
+- miecz
+- mroz
+- punkty
+- rog
+- szpiegostwo
+- wiez
+- wysokie morale
+- zmartwychwstanie

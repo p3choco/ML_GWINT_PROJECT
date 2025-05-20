@@ -1,0 +1,57 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "bohater"
+    },
+    {
+      "id": 1,
+      "name": "katapulta"
+    },
+    {
+      "id": 2,
+      "name": "lucznik"
+    },
+    {
+      "id": 3,
+      "name": "manekin"
+    },
+    {
+      "id": 4,
+      "name": "miecz"
+    },
+    {
+      "id": 5,
+      "name": "mroz"
+    },
+    {
+      "id": 6,
+      "name": "punkty"
+    },
+    {
+      "id": 7,
+      "name": "rog"
+    },
+    {
+      "id": 8,
+      "name": "szpiegostwo"
+    },
+    {
+      "id": 9,
+      "name": "wiez"
+    },
+    {
+      "id": 10,
+      "name": "wysokie morale"
+    },
+    {
+      "id": 11,
+      "name": "zmartwychwstanie"
+    }
+  ],
+  "info": {
+    "year": 2025,
+    "version": "1.0",
+    "contributor": "Label Studio"
+  }
+}
