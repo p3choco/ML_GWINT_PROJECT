@@ -12,10 +12,10 @@ special_cards = {
 
 class SpecialCard(Card):
 
-    name = None
-
     def __init__(self, signs):
         super().__init__("special_card")
+
+        self.name = None
 
         for sign in signs:
             if sign in special_cards:

@@ -10,16 +10,16 @@ row_types = {
 
 class Character(Card):
 
-    num_points = -1
-    card_row = None
-    high_morale = False
-    bond = False
-    horn = False
-    is_spy = False
-    is_hero = False
-
     def __init__(self, signs):
         super().__init__("character")
+
+        self.num_points = -1
+        self.card_row = None
+        self.high_morale = False
+        self.bond = False
+        self.horn = False
+        self.is_spy = False
+        self.is_hero = False
 
         if "wysokie morale" in signs:
             self.high_morale = True

@@ -22,10 +22,10 @@ king_names = {
 
 class King(Card):
 
-    king_name = None
-
     def __init__(self, signs):
         super().__init__("king")
+
+        self.king_name = None
         
         for sign in signs:
             if sign in king_names:
