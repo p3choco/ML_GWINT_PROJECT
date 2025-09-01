@@ -2,51 +2,227 @@
   "categories": [
     {
       "id": 0,
-      "name": "bohater"
+      "name": "0"
     },
     {
       "id": 1,
-      "name": "katapulta"
+      "name": "1"
     },
     {
       "id": 2,
-      "name": "lucznik"
+      "name": "10"
     },
     {
       "id": 3,
-      "name": "manekin"
+      "name": "11"
     },
     {
       "id": 4,
-      "name": "miecz"
+      "name": "12"
     },
     {
       "id": 5,
-      "name": "mroz"
+      "name": "13"
     },
     {
       "id": 6,
-      "name": "punkty"
+      "name": "14"
     },
     {
       "id": 7,
-      "name": "rog"
+      "name": "15"
     },
     {
       "id": 8,
-      "name": "szpiegostwo"
+      "name": "2"
     },
     {
       "id": 9,
-      "name": "wiez"
+      "name": "3"
     },
     {
       "id": 10,
-      "name": "wysokie morale"
+      "name": "4"
     },
     {
       "id": 11,
+      "name": "5"
+    },
+    {
+      "id": 12,
+      "name": "6"
+    },
+    {
+      "id": 13,
+      "name": "7"
+    },
+    {
+      "id": 14,
+      "name": "8"
+    },
+    {
+      "id": 15,
+      "name": "9"
+    },
+    {
+      "id": 16,
+      "name": "bohater"
+    },
+    {
+      "id": 17,
+      "name": "braterstwo"
+    },
+    {
+      "id": 18,
+      "name": "czyste niebo"
+    },
+    {
+      "id": 19,
+      "name": "deszcz"
+    },
+    {
+      "id": 20,
+      "name": "emhyr bialy plomien"
+    },
+    {
+      "id": 21,
+      "name": "emhyr cesarz nilfgaardu"
+    },
+    {
+      "id": 22,
+      "name": "emhyr jez z erlenwaldu"
+    },
+    {
+      "id": 23,
+      "name": "emhyr najezdzca polnocy"
+    },
+    {
+      "id": 24,
+      "name": "emhyr pan poludnia"
+    },
+    {
+      "id": 25,
+      "name": "eredin dowodca"
+    },
+    {
+      "id": 26,
+      "name": "eredin zdradziecki"
+    },
+    {
+      "id": 27,
+      "name": "foltest dowodca polnocy"
+    },
+    {
+      "id": 28,
+      "name": "foltest krol temerii"
+    },
+    {
+      "id": 29,
+      "name": "foltest syn medella"
+    },
+    {
+      "id": 30,
+      "name": "foltest zdobywca"
+    },
+    {
+      "id": 31,
+      "name": "foltest zelazny wladca"
+    },
+    {
+      "id": 32,
+      "name": "francesca elfka"
+    },
+    {
+      "id": 33,
+      "name": "francesca krolowa"
+    },
+    {
+      "id": 34,
+      "name": "francesca nadzieja"
+    },
+    {
+      "id": 35,
+      "name": "francesca najpiekniejsza"
+    },
+    {
+      "id": 36,
+      "name": "francesca stokrotka"
+    },
+    {
+      "id": 37,
+      "name": "katapulta"
+    },
+    {
+      "id": 38,
+      "name": "lucznik"
+    },
+    {
+      "id": 39,
+      "name": "lucznik katapulta"
+    },
+    {
+      "id": 40,
+      "name": "manekin"
+    },
+    {
+      "id": 41,
+      "name": "medyk"
+    },
+    {
+      "id": 42,
+      "name": "mgla"
+    },
+    {
+      "id": 43,
+      "name": "miecz"
+    },
+    {
+      "id": 44,
+      "name": "miecz lucznik"
+    },
+    {
+      "id": 45,
+      "name": "mroz"
+    },
+    {
+      "id": 46,
+      "name": "pozoga"
+    },
+    {
+      "id": 47,
+      "name": "pozoga rogi"
+    },
+    {
+      "id": 48,
+      "name": "punkty"
+    },
+    {
+      "id": 49,
+      "name": "rog"
+    },
+    {
+      "id": 50,
+      "name": "rogkarta"
+    },
+    {
+      "id": 51,
+      "name": "szpiegostwo"
+    },
+    {
+      "id": 52,
+      "name": "wiez"
+    },
+    {
+      "id": 53,
+      "name": "wysokie morale"
+    },
+    {
+      "id": 54,
       "name": "zmartwychwstanie"
+    },
+    {
+      "id": 55,
+      "name": "zrecznosc"
     }
   ],
   "info": {

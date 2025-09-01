@@ -1,17 +1,61 @@
 path: data
 train: ./train/images
 val: ./validation/images
-nc: 12
+nc: 56
 names:
+- '0'
+- '1'
+- '10'
+- '11'
+- '12'
+- '13'
+- '14'
+- '15'
+- '2'
+- '3'
+- '4'
+- '5'
+- '6'
+- '7'
+- '8'
+- '9'
 - bohater
+- braterstwo
+- czyste niebo
+- deszcz
+- emhyr bialy plomien
+- emhyr cesarz nilfgaardu
+- emhyr jez z erlenwaldu
+- emhyr najezdzca polnocy
+- emhyr pan poludnia
+- eredin dowodca
+- eredin zdradziecki
+- foltest dowodca polnocy
+- foltest krol temerii
+- foltest syn medella
+- foltest zdobywca
+- foltest zelazny wladca
+- francesca elfka
+- francesca krolowa
+- francesca nadzieja
+- francesca najpiekniejsza
+- francesca stokrotka
 - katapulta
 - lucznik
+- lucznik katapulta
 - manekin
+- medyk
+- mgla
 - miecz
+- miecz lucznik
 - mroz
+- pozoga
+- pozoga rogi
 - punkty
 - rog
+- rogkarta
 - szpiegostwo
 - wiez
 - wysokie morale
 - zmartwychwstanie
+- zrecznosc

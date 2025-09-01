@@ -1,4 +1,5 @@
 from ultralytics import YOLO
+import torch
 
 class FindCardsModel:
     def __init__(self, model_path):
