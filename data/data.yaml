@@ -1,6 +1,6 @@
 path: data
-train: train/images
-val: validation/images
+train: ./train/images
+val: ./validation/images
 nc: 12
 names:
 - bohater
