@@ -1,70 +1,72 @@
-from ultralytics import YOLO
 import cv2
-import numpy as np
-from card import Card
-from card_factory import CardFactory
-from side import Side
+from ultralytics import YOLO
+
+from APP.Classes.card_factory import CardFactory
+from APP.Classes.character import Character
+from APP.Classes.row import Row
+from APP.Classes.side import Side
 from const.models import FIND_SIGN_MODEL_PATH, FIND_CARDS_MODEL_PATH
 from models.find_sign_model import FindSignModel
 from models.find_cards_model import FindCardsModel
-from const.imgs import PLANSZA1, PLANSZA2, PLANSZA3
-
-test_data = {
-    "sword_row": [
-        ['2', 'miecz', 'rog'],
-        ['5', 'miecz']
-    ], 
-    "bow_row": [
-        ['4', 'lucznik']
-    ],
-    "catapult_row": [
-        ['1', 'katapulta', 'medyk'],
-        ['8', 'katapulta', 'wiez']
-    ],
-    "no_row":  [
-        ['foltest zdobywca']
-    ]
-}
+from const.imgs import PLANSZA2
 
 
-test_cards = {
-    row: [CardFactory.create_card(card) for card in cards]
-    for row, cards in test_data.items()
-}
+def count_points(cards):
+    pass
 
-img_path = "D:\pliki\Studia\kolo\ML_GWINT_PROJECT/data/images/aedaec00-brygada_impera.jpg"
-#2aeb2563-trzaskajacy_mroz1
-# results = model.predict(source=img_path, conf=0.25, iou=0.7, imgsz=640)
-
-
-
-def main():
-
+def main_pipeline():
+    players = {
+        "player1": Side({"sword_row": [], "bow_row": [], "catapult_row": [], "no_row": []}),
+        "player2": Side({"sword_row": [], "bow_row": [], "catapult_row": [], "no_row": []})
+    }
     findCardsModel = FindCardsModel(FIND_CARDS_MODEL_PATH)
-    result = findCardsModel.predict(PLANSZA1)
-    class_names = result.names
-    if result.boxes:
-        for box in result.boxes:
-            class_id = int(box.cls[0])
-            class_name = class_names[class_id]
+    findSignModel = FindSignModel(FIND_SIGN_MODEL_PATH)
 
-            confidence = float(box.conf[0])
+    board_image = cv2.imread(PLANSZA2)
 
-            bounding_box = box.xyxy[0].tolist()
+    if board_image is None:
+        print(f"Błąd: Nie można wczytać obrazu z {PLANSZA2}")
+        return
 
-            print(f"Obiekt: {class_name}")
-            print(f"  Pewność: {confidence:.2f}")
-            print(f"  Współrzędne [x1, y1, x2, y2]: {bounding_box}")
-            print("-" * 20)
-    else:
-        print("Nie wykryto żadnych obiektów na obrazie.")
-    # findSignModel = FindSignModel(FIND_SIGN_MODEL_PATH)
-    # r = findSignModel.predict(img_path)
-    #
-    # # print(r)
-    # signs = [r.names[cls_id] for cls_id in r.boxes.cls.int().tolist()]
-    # # print(f"LOOK: {signs}")
+    print("--- ETAP 1: Wykrywanie wszystkich kart na planszy ---")
+    # === KROK 2: Uruchomienie pierwszego modelu do lokalizacji kart ===
+    # Przekazujemy cały obraz (jako tablicę NumPy) do modelu
+    card_detection_results = findCardsModel.predict(board_image)
+
+    # Wyniki są zazwyczaj listą, bierzemy pierwszy element
+
+    if not card_detection_results.boxes:
+        print("Nie wykryto żadnych kart na planszy.")
+        return
+
+    print(f"Znaleziono {len(card_detection_results.boxes)} kart. Rozpoczynam analizę szczegółową...\n")
+
+    # === KROK 3: Pętla po każdej wykrytej karcie ===
+    for i, box in enumerate(card_detection_results.boxes):
+        coords = box.xyxy[0].int().tolist()
+        x1, y1, x2, y2 = coords
+
+        # === KROK 4: Wycięcie karty z obrazu (bezpośrednio w pamięci) ===
+        cropped_card_image = board_image[y1:y2, x1:x2]
+
+        card_class_name = card_detection_results.names[int(box.cls[0])]
+        print(f"--- Analizuję kartę nr {i + 1} (wykryty typ: '{card_class_name}') ---")
+
+        # === KROK 5: Przekazanie wyciętego fragmentu do drugiego modelu ===
+        sign_detection_results = findSignModel.predict(cropped_card_image)
+
+        # === KROK 6: Zebranie i wyświetlenie wyników dla tej jednej karty ===
+        if sign_detection_results.boxes:
+            signs = [sign_detection_results.names[int(cls_id)] for cls_id in sign_detection_results.boxes.cls]
+            card = CardFactory.create_card(signs)
+            # TODO wykryć która strona
+            print(sides['left'])
+            # sides['left'].append(card)
+            print(card)
+
+        else:
+            print("  -> Nie znaleziono żadnych symboli na tej karcie.")
 
 
-main()
-
+if __name__ == "__main__":
+    main_pipeline()

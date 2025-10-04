@@ -1,12 +1,13 @@
 from card import Card
 
 row_types = {
-                "miecz",
-                "lucznik",
-                "katapulta",
-                "lucznik katapulta",
-                "miecz lucznik",
-            } 
+    "miecz",
+    "lucznik",
+    "katapulta",
+    "lucznik katapulta",
+    "miecz lucznik",
+}
+
 
 class Character(Card):
 
@@ -23,18 +24,18 @@ class Character(Card):
 
         if "wysokie morale" in signs:
             self.high_morale = True
-        
+
         if "wiez" in signs:
             self.bond = True
-        
+
         for sign in signs:
-            
+
             if sign.isdigit():
                 self.num_points = sign
             elif sign in row_types:
                 self.card_row = sign
             elif sign == "rog":
-                self.horn = True 
+                self.horn = True
             elif sign == "szpiegostwo":
                 self.is_spy = True
             elif sign == "bohater":

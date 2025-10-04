@@ -1,19 +1,11 @@
 class Row:
-
     def __init__(self, cards_list):
-        self.cards_list = []
-        for card in cards_list:
-            self.cards_list.append(card)
-    
+        self.cards_list = list(cards_list)
+
     def __str__(self):
-        message = ""
-        for card in self.cards_list:
-            message += f"\nCard:\n { card }"
-        return message
-        
-        
-        
+        if not self.cards_list:
+            return "[ Pusto ]"
+        return "\n    ".join(str(card) for card in self.cards_list)
 
-
-
-
+    def add_card(self, card):
+        self.cards_list.append(card)
