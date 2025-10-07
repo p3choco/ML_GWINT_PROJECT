@@ -24,3 +24,15 @@ class Side:
     CATAPULT ROW:
         {self.catapult_row}
         """
+    def findRow(self, card):
+        if card.card_type == 'king':
+            return self.no_row
+        # TODO partia skojatel zmiana
+        if card.card_row == 'miecz':
+            return self.sword_row
+        elif card.card_row == 'lucznik':
+            return self.bow_row
+        elif card.card_row == 'katapulta':
+            return self.catapult_row
+        else:
+            return self.no_row

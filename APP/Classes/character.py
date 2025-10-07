@@ -1,12 +1,5 @@
+from APP.Classes.const.cards import row_types
 from card import Card
-
-row_types = {
-    "miecz",
-    "lucznik",
-    "katapulta",
-    "lucznik katapulta",
-    "miecz lucznik",
-}
 
 
 class Character(Card):
@@ -14,7 +7,7 @@ class Character(Card):
     def __init__(self, signs):
         super().__init__("character")
 
-        self.num_points = -1
+        self.num_points = None
         self.card_row = None
         self.high_morale = False
         self.bond = False
@@ -31,8 +24,9 @@ class Character(Card):
         for sign in signs:
 
             if sign.isdigit():
-                self.num_points = sign
+                self.num_points = int(sign)
             elif sign in row_types:
+                print(sign)
                 self.card_row = sign
             elif sign == "rog":
                 self.horn = True

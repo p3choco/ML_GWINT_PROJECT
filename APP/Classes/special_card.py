@@ -1,14 +1,5 @@
+from APP.Classes.const.cards import special_cards
 from card import Card
-
-special_cards = {
-    "mgla",
-    "czyste niebo",
-    "deszcz", 
-    "mroz",
-    "pozoga",
-    "rogkarta",
-    "manekin"
-}
 
 class SpecialCard(Card):
 
