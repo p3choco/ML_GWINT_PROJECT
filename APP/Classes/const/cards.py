@@ -1,7 +1,10 @@
-special_cards = {
+weather_cards = {
     "mgla",
     "czyste niebo",
-    "deszcz",
+    "deszcz"
+}
+special_cards = {
+    weather_cards,
     "mroz",
     "pozoga",
     "rogkarta",

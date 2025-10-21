@@ -9,6 +9,9 @@ from const.models import FIND_SIGN_MODEL_PATH, FIND_CARDS_MODEL_PATH
 from models.find_sign_model import FindSignModel
 from models.find_cards_model import FindCardsModel
 from const.imgs import PLANSZA2
+from king import King
+from special_card import SpecialCard
+from APP.Classes.const.cards import weather_cards
 
 
 def find_bond_partners(source_card, all_cards_in_row):
@@ -31,6 +34,21 @@ def find_bond_partners(source_card, all_cards_in_row):
     return num_of_partners
 
 
+def check_king(card, player, players):
+    if card.king_name == "eredin dowodca":
+        player.sword_row.isHorn = True
+    elif card.king_name == "eredin zdradziecki":
+        players['player1'].is_double_spy = True
+        players['player2'].is_double_spy = True
+    elif card.king_name == "francesca najpiekniejsza":
+        player.bow_row.isHorn = True
+    elif card.king_name == "francesca nadzieja":
+        #idk, przesuwa te które mogą zmieniać rząd "optymalnie"
+        pass
+    elif card.king_name == "foltest zdobywca":
+        player.catapult_row.isHorn = True
+
+
 def count_points(player):
     all_rows = [
         player.sword_row,
@@ -39,15 +57,20 @@ def count_points(player):
     ]
     points = 0
     hero_points = 0
-
     for row in all_rows:
         row_points = 0
         for card in row.get_cards():
-            if card.num_points is None:
-                continue
             local_card_points = card.num_points
+
             if row.isWeather:
                 local_card_points = 1
+
+            if player.is_double_spy and card.is_spy:
+                local_card_points *= 2
+
+            if card.num_points is None:
+                continue
+
             if card.high_morale:
                 row_points += (len(row.get_cards()) - 1)
 
@@ -63,11 +86,12 @@ def count_points(player):
 
         if row.isHorn:
             row_points *= 2
+
         points += (row_points + hero_points)
     return points
 
 
-def checkPlayer():
+def check_player():
     #TODO
     return "player1"
 
@@ -81,6 +105,7 @@ def main_pipeline():
 
     board_image = cv2.imread(PLANSZA2)
 
+    # board_image = cv2.rotate(board_image, cv2.ROTATE_90_COUNTERCLOCKWISE)
     if board_image is None:
         print(f"Błąd: Nie można wczytać obrazu z {PLANSZA2}")
         return
@@ -106,8 +131,8 @@ def main_pipeline():
 
         card_class_name = card_detection_results.names[int(box.cls[0])]
         print(f"--- Analizuję kartę nr {i + 1} (wykryty typ: '{card_class_name}') ---")
-        # w zależności jak jest karta tak trza ją obrócić
-        cropped_card_image = cv2.rotate(cropped_card_image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+        # # w zależności jak jest karta tak trza ją obrócić
+        # cropped_card_image = cv2.rotate(cropped_card_image, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
         # === KROK 5: Przekazanie wyciętego fragmentu do drugiego modelu ===
         sign_detection_results = findSignModel.predict(cropped_card_image)
@@ -115,11 +140,14 @@ def main_pipeline():
         # === KROK 6: Zebranie i wyświetlenie wyników dla tej jednej karty ===
         if sign_detection_results.boxes:
             #narazie mock:
-            player = checkPlayer()
+            player = check_player()
             signs = [sign_detection_results.names[int(cls_id)] for cls_id in sign_detection_results.boxes.cls]
             card = CardFactory.create_card(signs)
             #obsługa rogu na karcie
 
+            if isinstance(card, King):
+                check_king(card, players[player])
+                continue
             if card.horn:
                 if card.card_row == "miecz":
                     players[player].sword_row.isHorn = True
@@ -127,6 +155,16 @@ def main_pipeline():
                     players[player].bow_row.isHorn = True
                 elif card.card_row == "katapulta":
                     players[player].catapult_row.isHorn = True
+            
+            #obsługa kart pogody
+            if isinstance(card, SpecialCard):
+                if card.name in weather_cards:
+                    if card.card_row == "miecz":
+                        players[player].sword_row.isWeather = True
+                    elif card.card_row == "lucznik":
+                        players[player].bow_row.isWeather = True
+                    elif card.card_row == "katapulta":
+                        players[player].catapult_row.isWeather = True
 
             annotated_cropped_card = cropped_card_image.copy()
             for sign_box in sign_detection_results.boxes:

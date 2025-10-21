@@ -8,7 +8,7 @@ class Side:
         self.bow_row = Row(side.get('bow_row', []))
         self.catapult_row = Row(side.get('catapult_row', []))
         self.no_row = Row(side.get('no_row', []))
-
+        self.is_double_spy = False
         self.king_card = next((card for card in side.get('no_row', []) if isinstance(card, King)), None)
 
     def __str__(self):
